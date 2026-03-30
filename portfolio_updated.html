@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Saba Mehmood - SQA Engineer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --surface2: #1a2236;
+      --border: #1e2d45;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --green: #34d399;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --tag-bg: #0f1f35;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+      background-image: 
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><g transform="rotate(-20 60 60)" stroke="%2338bdf8" stroke-width="2" fill="none"><ellipse cx="60" cy="65" rx="26" ry="28"/><circle cx="60" cy="30" r="10"/><line x1="60" y1="40" x2="60" y2="95"/><circle cx="45" cy="65" r="3" fill="%2338bdf8"/><circle cx="75" cy="65" r="3" fill="%2338bdf8"/><circle cx="50" cy="80" r="3" fill="%2338bdf8"/><circle cx="70" cy="80" r="3" fill="%2338bdf8"/><line x1="50" y1="20" x2="45" y2="10"/><line x1="70" y1="20" x2="75" y2="10"/></g><text x="60" y="110" font-size="14" text-anchor="middle" fill="%2338bdf8" font-family="Arial, sans-serif">BUG</text></svg>');
+      background-repeat: repeat;
+      background-size: 110px 110px;
+    }
+
+    nav, section, footer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem; color: var(--accent);
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--tag-bg); border: 1px solid var(--border);
+      padding: .35rem .9rem; border-radius: 999px;
+      font-size: .75rem; color: var(--accent); margin-bottom: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--muted);
+      max-width: 560px; margin: 0 auto 2.5rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      padding: .7rem 1.6rem; border-radius: 8px; font-size: .9rem;
+      font-weight: 500; cursor: pointer; text-decoration: none;
+      transition: all .2s; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0e1a;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      display: flex; gap: 3rem; margin-top: 4rem; flex-wrap: wrap; justify-content: center;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 2rem; font-weight: 700; color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .2rem; }
+
+    /* SECTIONS */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; color: var(--accent); letter-spacing: .1em;
+      text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700; margin-bottom: 3rem;
+      letter-spacing: -.02em;
+    }
+    .divider {
+      border: none; border-top: 1px solid var(--border); margin: 0;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: .95rem; }
+    .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+    .highlight-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hl-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .hl-title { font-size: .9rem; font-weight: 600; }
+    .hl-sub { font-size: .78rem; color: var(--muted); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .skill-card-header { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+    .sk-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--tag-bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+    }
+    .sk-title { font-weight: 600; font-size: .95rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      background: var(--tag-bg); border: 1px solid var(--border);
+      color: var(--muted); font-size: .72rem; padding: .25rem .6rem;
+      border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+    }
+    .tag.accent { border-color: rgba(56,189,248,.3); color: var(--accent); }
+
+    /* EXPERIENCE */
+    .exp-timeline { position: relative; padding-left: 2rem; }
+    .exp-timeline::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .exp-item {
+      position: relative; margin-bottom: 3rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem 1.75rem;
+      transition: border-color .2s;
+    }
+    .exp-item:hover { border-color: var(--accent2); }
+    .exp-item::before {
+      content: ''; position: absolute; left: -2.45rem; top: 1.5rem;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+    .exp-company { font-size: 1.05rem; font-weight: 700; color: var(--accent); }
+    .exp-role { font-size: .85rem; color: var(--muted); margin-top: .15rem; }
+    .exp-meta { text-align: right; }
+    .exp-date {
+      font-size: .78rem; color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .exp-location { font-size: .78rem; color: var(--muted); margin-top: .15rem; }
+    .exp-bullets { list-style: none; margin-top: .5rem; }
+    .exp-bullets li {
+      font-size: .875rem; color: var(--muted); padding: .3rem 0;
+      padding-left: 1.2rem; position: relative;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: .7rem;
+    }
+    .exp-bullets li strong { color: var(--text); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .project-card:hover { border-color: var(--green); transform: translateY(-3px); }
+    .project-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--tag-bg); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1rem;
+    }
+    .project-name { font-weight: 700; margin-bottom: .4rem; }
+    .project-desc { font-size: .85rem; color: var(--muted); margin-bottom: 1rem; }
+    .project-domain {
+      font-size: .72rem; font-family: 'JetBrains Mono', monospace;
+      color: var(--green); border: 1px solid rgba(52,211,153,.2);
+      background: rgba(52,211,153,.05); padding: .25rem .6rem; border-radius: 4px;
+      display: inline-block;
+    }
+
+    /* CERTS */
+    .certs-grid { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(300px, 1fr)); gap: 2rem; }
+    .cert-card {
+      
+      border-radius: 8px; overflow: hidden;
+      transition: none;
+    }
+    .cert-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .cert-image {
+      width: 100%; object-fit: contain;
+      
+    }
+    .cert-content { padding: 1.25rem; }
+    .cert-icon { font-size: 1.4rem; }
+    .cert-name { font-size: .95rem; font-weight: 600; margin-bottom: .3rem; }
+    .cert-issuer { font-size: .8rem; color: var(--muted); margin-bottom: .5rem; }
+    .cert-date { font-size: .75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+    
+    /* SPOTLIGHT */
+    .spotlight-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px; padding: 2rem;
+      display: flex; justify-content: center;
+      margin-bottom: 3rem;
+    } 
+    .spotlight-image {
+    
+      background-size: contain;
+      background-position: center;
+      width: 80%; border-radius: 8px; border: 1px solid var(--border);
+    }
+   
+
+    /* EDUCATION */
+    .edu-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem;
+      display: flex; gap: 1.5rem; align-items: flex-start;
+    }
+    .edu-icon {
+      width: 52px; height: 52px; flex-shrink: 0; border-radius: 10px;
+      background: var(--tag-bg); display: flex; align-items: center;
+      justify-content: center; font-size: 1.6rem;
+    }
+    .edu-degree { font-size: 1.05rem; font-weight: 700; }
+    .edu-uni { font-size: .9rem; color: var(--accent); margin: .25rem 0; }
+    .edu-meta { font-size: .82rem; color: var(--muted); }
+
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted); font-size: .85rem;
+    }
+    footer span { color: var(--accent); }
+
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .exp-header { flex-direction: column; }
+      .exp-meta { text-align: left; }
+      .spotlight-card { justify-content: center; }
+      .certs-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">{ Saba Mehmood }</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> Open to Opportunities</div>
+  <h1>Saba Mehmood<br/><span>SQA Engineer | Quality, Automated.</span></h1>
+  <p class="hero-sub">
+    4+ years ensuring software excellence across FinTech, Banking &amp; Crypto domains — through robust test automation, CI/CD pipelines, and meticulous manual testing.
+  </p>
+  <div class="hero-btns">
+    <a href="#experience" class="btn btn-primary">View Experience</a>
+    <a href="#skills" class="btn btn-ghost">Explore Skills</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">4+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Test Cases Executed</div></div>
+    <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Bugs Tracked</div></div>
+    <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Pass Rate Achieved</div></div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">// about</div>
+    <h2 class="section-title">Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a Software Quality Assurance Engineer with 4+ years of experience in both manual and automation testing. My work spans FinTech, Banking, and Crypto domains — industries where precision and reliability aren't optional.</p>
+        <p>I specialize in building scalable test automation frameworks using Selenium and Playwright, integrating them into CI/CD pipelines with Jenkins and GitHub. I take pride in making testing a first-class citizen in the development lifecycle.</p>
+        <p>Beyond writing test cases, I'm actively involved in Scrum ceremonies, cross-team collaboration, and driving continuous quality improvements — from standups to client demos.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-card">
+          <div class="hl-icon">🤖</div>
+          <div><div class="hl-title">Test Automation Expert</div><div class="hl-sub">Selenium, Playwright, Pytest, POM</div></div>
+        </div>
+        <div class="highlight-card">
+          <div class="hl-icon">🏦</div>
+          <div><div class="hl-title">FinTech & Banking Domain</div><div class="hl-sub">KFH, MetricApp, Crypto Exchange</div></div>
+        </div>
+        <div class="highlight-card">
+          <div class="hl-icon">⚙️</div>
+          <div><div class="hl-title">CI/CD Integration</div><div class="hl-sub">Jenkins, GitHub Actions, Maven</div></div>
+        </div>
+        <div class="highlight-card">
+          <div class="hl-icon">📱</div>
+          <div><div class="hl-title">Cross-Platform Testing</div><div class="hl-sub">Web, Android, iOS + Arabic RTL</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">// skills</div>
+    <h2 class="section-title">Technical Expertise</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">🧪</div>
+          <div class="sk-title">Test Automation</div>
+        </div>
+        <div class="tags">
+          <span class="tag accent">Selenium</span>
+          <span class="tag accent">Playwright</span>
+          <span class="tag accent">Appium</span>
+          <span class="tag">Pytest</span>
+          <span class="tag">POM</span>
+          <span class="tag">Allure Reports</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">🔍</div>
+          <div class="sk-title">Manual Testing</div>
+        </div>
+        <div class="tags">
+          <span class="tag">Regression</span>
+          <span class="tag">Sanity</span>
+          <span class="tag">Smoke</span>
+          <span class="tag">Exploratory</span>
+          <span class="tag">UI/UX</span>
+          <span class="tag">Cross-browser</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">🌐</div>
+          <div class="sk-title">API Testing</div>
+        </div>
+        <div class="tags">
+          <span class="tag accent">Postman</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Positive Testing</span>
+          <span class="tag">Negative Testing</span>
+          <span class="tag">40+ Endpoints</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">⚙️</div>
+          <div class="sk-title">DevOps & CI/CD</div>
+        </div>
+        <div class="tags">
+          <span class="tag accent">Jenkins</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Maven</span>
+          <span class="tag">JMeter</span>
+          <span class="tag">Pipelines</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">🐛</div>
+          <div class="sk-title">Bug Tracking & Agile</div>
+        </div>
+        <div class="tags">
+          <span class="tag accent">Jira</span>
+          <span class="tag">Scrum</span>
+          <span class="tag">Sprint Planning</span>
+          <span class="tag">SDLC</span>
+          <span class="tag">STLC</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-card-header">
+          <div class="sk-icon">🐍</div>
+          <div class="sk-title">Programming</div>
+        </div>
+        <div class="tags">
+          <span class="tag accent">Python</span>
+          <span class="tag">Test Case Design</span>
+          <span class="tag">Bug Reporting</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">// experience</div>
+    <h2 class="section-title">Work History</h2>
+    <div class="exp-timeline">
+
+      <!-- MetricApp -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Metric App</div>
+            <div class="exp-role">SQA Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Dec 2024 – Present</div>
+            <div class="exp-location">📍 Rawalpindi, Pakistan</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Tested <strong>15+ core features</strong>, achieving <strong>98% pass rate</strong> before each release</li>
+          <li>Built automation test suites for <strong>Zoho Books, QuickBooks, Shopify, Xero, Qoyod</strong> integrations including complex signup flows</li>
+          <li>Developed customized <strong>Allure Reports</strong> with screenshots, video recordings, and connection status indicators</li>
+          <li>Performed comprehensive manual testing on integrations with QuickBooks, Zoho Books, Shopify, Qoyod, Xero, Zid, and CSV upload</li>
+          <li>Validated integration accuracy by cross-verifying transaction data with source sheets</li>
+          <li>Conducted functional, regression, and UI/UX testing on <strong>web, Android, and iOS</strong> including Arabic language support</li>
+          <li>Tested the <strong>Max Chat AI Assistant</strong> module — verifying financial responses (P&amp;L, net profit, gross profit)</li>
+          <li>Actively participated in daily standups, QA check-ins, and weekly product review meetings</li>
+        </ul>
+      </div>
+
+      <!-- Sofit -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Sofit Consultancy Pvt. Ltd</div>
+            <div class="exp-role">SQA Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Mar 2022 – Nov 2024</div>
+            <div class="exp-location">📍 Rawalpindi, Pakistan</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Collaborated with <strong>Aion Digital</strong> on the <strong>Kuwait Finance House (KFH)</strong> banking project — web, Android, iOS with Arabic support</li>
+          <li>Performed manual testing on <strong>20+ Android apps, 5+ iOS apps, and 5+ websites</strong></li>
+          <li>Logged and tracked <strong>150+ bugs in Jira</strong> with a <strong>90% closure rate</strong> within sprint cycles</li>
+          <li>Executed <strong>500+ test cases</strong> across 3 environments, reducing regression bugs by <strong>30%</strong></li>
+          <li>Active contributor in Scrum, Sprint ceremonies, and Client Demos</li>
+        </ul>
+      </div>
+
+      <!-- AKRU -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">AKRU</div>
+            <div class="exp-role">Associate SQA Engineer</div>
+          </div>
+          <div class="exp-meta">
+            <div class="exp-date">Dec 2021 – Feb 2022</div>
+            <div class="exp-location">📍 Rawalpindi, Pakistan</div>
+          </div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Performed automation and manual testing on the <strong>Crypto Exchange</strong> project</li>
+          <li>Implemented <strong>Page Object Model (POM)</strong> using Selenium + Python + Pytest framework</li>
+          <li>Executed automation through <strong>Jenkins pipelines</strong> and Maven for CI</li>
+          <li>Validated <strong>40+ API endpoints</strong> via Postman covering positive and negative scenarios</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">// projects</div>
+    <h2 class="section-title">Key Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-name">MetricApp</div>
+        <div class="project-desc">A financial intelligence platform helping business owners understand their finances through AI-powered insights and third-party accounting integrations.</div>
+        <span class="project-domain">FinTech / AI Assistant</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🏦</div>
+        <div class="project-name">Kuwait Finance House (KFH)</div>
+        <div class="project-desc">Full-scale banking system for the Gulf region — tested across web, Android, and iOS with full Arabic RTL language support.</div>
+        <span class="project-domain">Banking / Gulf Region</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">₿</div>
+        <div class="project-name">AKRU</div>
+        <div class="project-desc">A crypto exchange platform for real estate investment — automated test coverage using Selenium, Pytest, and Jenkins CI pipelines.</div>
+        <span class="project-domain">Crypto / Real Estate</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<!-- CERTIFICATIONS -->
+<section id="education">
+  <div class="container">
+    
+    <!-- SPOTLIGHT SECTION -->
+    <div class="section-label">// recognition</div>
+    <h2 class="section-title">Team Spotlight</h2>
+    <div class="spotlight-card">
+      <img src="spotlight2025.jpg" alt="Team Spotlight - Engineering Monthly Newsletter" class="spotlight-image"/>
+    </div>
+
+    <div class="section-label">// certifications</div>
+    <h2 class="section-title">Professional Certifications</h2>
+    <div class="certs-grid">
+      
+      <div class="cert-card">
+        <img src="agile testing.jpg" alt="Agile Testing Certification" class="cert-image"/>
+        <div class="cert-content">
+          <div class="cert-name">Agile Testing</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
+          <div class="cert-date">Completed: March 8, 2024 · 48 minutes</div>
+        </div>
+      </div>
+      
+      <div class="cert-card">
+        <img src="postman cert.jpg" alt="Postman Essential Training" class="cert-image"/>
+        <div class="cert-content">
+          <div class="cert-name">Postman Essential Training</div>
+          <div class="cert-issuer">LinkedIn Learning</div>
+          <div class="cert-date">Completed: Mar 7, 2024 · 1 hour 45 minutes</div>
+        </div>
+      </div>
+      
+      <div class="cert-card">
+        <img src="jenkins.jpg" alt="Getting Started with Jenkins" class="cert-image"/>
+        <div class="cert-content">
+          <div class="cert-name">Getting Started with Jenkins</div>
+          <div class="cert-issuer">SkillUp by Simplilearn</div>
+          <div class="cert-date">Completed: Mar 3, 2022</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-label" style="margin-top: 3.5rem;">// education</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-degree">Bachelor of Software Engineering</div>
+        <div class="edu-uni">University of Engineering & Technology, Taxila — Pakistan</div>
+        <div class="edu-meta">2017 – 2021 &nbsp;·&nbsp; Software Engineering</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider"/>
+
+<footer>
+  <p>Built with precision by Saba Mehmood — because quality matters. &nbsp;|&nbsp; <span>SQA Engineer</span> · Rawalpindi, Pakistan</p>
+  <p style="margin-top:.5rem; font-size:.78rem;">English (Native) · Urdu (Native)</p>
+</footer>
+
+</body>
+</html>
